@@ -2,31 +2,31 @@
 
 :root {
   /* Primary Colors */
-  --color-primary: #2563EB;
-  --color-primary-light: #3B82F6;
-  --color-primary-dark: #1D4ED8;
+  --color-primary: #44ACD3;
+  --color-primary-light: #5FBFDF;
+  --color-primary-dark: #3595B8;
 
   /* Accent Colors */
-  --color-accent: #F59E0B;
-  --color-accent-light: #FBBF24;
+  --color-accent: #FF6B35;
+  --color-accent-light: #FF8F66;
 
   /* Background Colors */
   --color-bg-primary: #ffffff;
-  --color-bg-secondary: #F8FAFC;
-  --color-bg-tertiary: #F1F5F9;
+  --color-bg-secondary: #F8FAFA;
+  --color-bg-tertiary: #FFF8F2;
 
   /* Text Colors */
-  --color-text-primary: #1E293B;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94A3B8;
+  --color-text-primary: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-text-muted: #B2BEC3;
 
   /* Border Colors */
-  --color-border: #E2E8F0;
-  --color-border-light: #F1F5F9;
+  --color-border: #E0E6E6;
+  --color-border-light: #F0F4F4;
 
   /* CTA Colors */
-  --color-cta: #F59E0B;
-  --color-cta-hover: #D97706;
+  --color-cta: #FF6B35;
+  --color-cta-hover: #E85A25;
   --color-cta-text: #ffffff;
 }
 

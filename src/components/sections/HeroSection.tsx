@@ -5,70 +5,110 @@ import CTAButton from "@/components/common/CTAButton";
 import { sampleData } from "@/data/sample";
 
 export default function HeroSection() {
-  const { hero, cta, service } = sampleData;
+  const { cta } = sampleData;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary-light)] overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative overflow-hidden bg-[#e8f4fb]">
+      <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+        {/* 背景画像（集中線+人物） */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 25% 25%, white 1px, transparent 1px), radial-gradient(circle at 75% 75%, white 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
+            backgroundImage: "url('/images/hero-bg-v5.png')",
           }}
         />
-      </div>
 
-      <div className="relative max-w-5xl mx-auto px-6 py-20 text-center text-white">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight whitespace-pre-line"
-        >
-          {hero.catchcopy}
-        </motion.h1>
+        {/* テキストオーバーレイ - 中央配置 */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
+          {/* 転職応援キャンペーン */}
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="font-[var(--font-rounded)] text-[#44ACD3] text-4xl md:text-7xl lg:text-9xl font-extrabold tracking-wider"
+            style={{
+              WebkitTextStroke: "5px white",
+              paintOrder: "stroke fill",
+              textShadow: "0 0 8px rgba(255,255,255,0.8), 0 0 16px rgba(255,255,255,0.4)",
+            }}
+          >
+            転職応援キャンペーン！
+          </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="mt-6 text-lg md:text-xl text-white/90 max-w-2xl mx-auto"
-        >
-          {hero.subcopy}
-        </motion.p>
+          {/* 入社祝い金 */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="font-[var(--font-rounded)] mt-1 md:mt-2 text-3xl md:text-5xl lg:text-8xl font-extrabold"
+            style={{
+              color: "#1B2567",
+              WebkitTextStroke: "6px white",
+              paintOrder: "stroke fill",
+              textShadow: "0 0 10px rgba(255,255,255,1), 0 0 20px rgba(255,255,255,0.6)",
+            }}
+          >
+            入社祝い金
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="mt-10"
-        >
-          <CTAButton href="#contact" size="xl">
-            {cta.buttonText}
-          </CTAButton>
-          <p className="mt-4 text-sm text-white/70">{cta.subText}</p>
-        </motion.div>
-
-        {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
-        >
-          {service.stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-[var(--color-accent-light)]">
-                {stat.value}
-                {stat.suffix}
-              </div>
-              <div className="text-sm text-white/70 mt-1">{stat.label}</div>
+          {/* 100万円 */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6 md:mt-10"
+          >
+            <div className="flex items-end justify-center">
+              <span
+                className="text-[14rem] md:text-[24rem] lg:text-[32rem] leading-[0.75]"
+                style={{
+                  fontFamily: "'Impact', 'Arial Black', sans-serif",
+                  fontStyle: "italic",
+                  color: "#FFFFFF",
+                  WebkitTextStroke: "4px #1B2567",
+                  paintOrder: "stroke fill",
+                  textShadow: "4px 4px 0px rgba(0,0,0,0.2), 8px 8px 15px rgba(0,0,0,0.1)",
+                }}
+              >
+                100
+              </span>
+              <span
+                className="text-5xl md:text-8xl lg:text-[10rem] font-extrabold mb-0 tracking-[-0.1em]"
+                style={{
+                  fontFamily: "var(--font-shippori), serif",
+                  color: "#FFFFFF",
+                  WebkitTextStroke: "6px #1B2567",
+                  paintOrder: "stroke fill",
+                  textShadow: "3px 3px 0px rgba(0,0,0,0.2), 6px 6px 10px rgba(0,0,0,0.1)",
+                }}
+              >
+                万円
+              </span>
             </div>
-          ))}
-        </motion.div>
+          </motion.div>
+
+          {/* サブメッセージ */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="font-[var(--font-rounded)] text-[#2D3436] text-xl md:text-3xl lg:text-5xl font-extrabold mt-4 md:mt-8"
+          >
+            あなたの新社会生活を応援します
+          </motion.p>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.65 }}
+            className="mt-4 md:mt-6"
+          >
+            <CTAButton href={cta.registerUrl} size="lg">
+              {cta.buttonText}
+            </CTAButton>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

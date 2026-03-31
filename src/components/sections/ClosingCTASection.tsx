@@ -5,39 +5,53 @@ import CTAButton from "@/components/common/CTAButton";
 import { sampleData } from "@/data/sample";
 
 export default function ClosingCTASection() {
-  const { cta, company, offer } = sampleData;
+  const { cta } = sampleData;
 
   return (
     <section
       id="contact"
-      className="py-20 md:py-28 bg-gradient-to-br from-[var(--color-primary-dark)] to-[var(--color-primary)] text-white"
+      className="relative py-16 md:py-24 text-white overflow-hidden"
     >
-      <div className="max-w-3xl mx-auto px-6 text-center">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/images/closing-bg.png')",
+          backgroundColor: "#3595B8",
+        }}
+      />
+
+      {/* Overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(53,149,184,0.92) 0%, rgba(68,172,211,0.85) 100%)",
+        }}
+      />
+
+      <div className="relative max-w-3xl mx-auto px-6 text-center">
         <FadeIn>
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-            まずは{company.cvType}から
+          <h2 className="text-2xl md:text-4xl font-bold leading-snug">
+            あなたの「転職したい」に、
             <br />
-            お気軽にご相談ください
+            100万円の後押しを。
           </h2>
 
-          {offer.incentive && (
-            <p className="mt-6 text-lg text-[var(--color-accent-light)] font-medium">
-              {offer.incentive}
-            </p>
-          )}
+          <p className="mt-5 text-base md:text-lg text-white/90 leading-relaxed">
+            まだ迷っていても大丈夫。
+            <br />
+            相談だけでも、あなたの未来は動き出します。
+          </p>
 
           <div className="mt-10">
-            <CTAButton href="#" size="xl" variant="cta">
-              {cta.buttonText}
+            <CTAButton href={cta.registerUrl} size="xl" variant="cta">
+              無料で相談してみる
             </CTAButton>
-            <p className="mt-4 text-sm text-white/70">{cta.subText}</p>
-          </div>
-
-          {offer.guarantee && (
-            <p className="mt-8 text-sm text-white/60">
-              {offer.guarantee}
+            <p className="mt-4 text-sm text-white/70">
+              30秒で登録完了 ｜ 利用料ずっと0円 ｜ 退会も自由
             </p>
-          )}
+          </div>
         </FadeIn>
       </div>
     </section>

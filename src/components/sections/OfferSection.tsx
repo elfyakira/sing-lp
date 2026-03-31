@@ -2,72 +2,63 @@
 
 import { FadeIn } from "@/components/animations";
 import CTAButton from "@/components/common/CTAButton";
-import { Gift, Shield } from "lucide-react";
 import { sampleData } from "@/data/sample";
 
 export default function OfferSection() {
-  const { offer, cta } = sampleData;
+  const { cta } = sampleData;
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="py-16 md:py-24 bg-[var(--color-bg-tertiary)]">
+      <div className="max-w-[900px] mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-14">
-            <p className="text-[var(--color-primary)] font-medium text-sm tracking-wider uppercase mb-3">
-              Offer
+          <div className="text-center">
+            <p className="text-[var(--color-text-secondary)] text-2xl md:text-4xl font-medium">
+              ツナゲルの利用料は、ずっと
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">
-              今だけの特別なご案内
-            </h2>
-            <div className="section-divider mt-4" />
+            <p className="mt-3 text-8xl md:text-[128px] font-bold text-[var(--color-primary)] leading-none">
+              0<span className="text-5xl md:text-7xl">円</span>
+            </p>
+            <p className="mt-6 text-lg md:text-2xl text-[var(--color-text-secondary)] leading-relaxed">
+              求人紹介、履歴書添削、面接対策、入社後サポート。
+              <br />
+              すべてのサービスを、完全無料でご利用いただけます。
+            </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.2}>
-          <div className="bg-white rounded-2xl shadow-lg border border-[var(--color-border-light)] overflow-hidden">
-            {/* Price */}
-            {offer.showPrice && (
-              <div className="bg-[var(--color-primary)] text-white text-center py-6 px-6">
-                <p className="text-sm opacity-80 mb-1">料金</p>
-                <p className="text-3xl md:text-4xl font-bold">{offer.price}</p>
-              </div>
-            )}
+          <div className="mt-10 md:mt-14 border-2 border-[var(--color-accent)] rounded-2xl bg-white p-10 md:p-14 text-center">
+            <p className="text-[var(--color-text-secondary)] text-xl md:text-3xl font-medium">
+              さらに、入社祝い金
+            </p>
+            <p className="mt-3 flex items-baseline justify-center gap-2">
+              <span className="text-2xl md:text-4xl text-[var(--color-text-primary)] font-bold">
+                最大
+              </span>
+              <span className="text-7xl md:text-[96px] font-bold text-[var(--color-accent)] leading-none">
+                100
+              </span>
+              <span className="text-4xl md:text-6xl font-bold text-[var(--color-accent)]">
+                万円
+              </span>
+            </p>
+            <p className="mt-5 text-lg md:text-2xl text-[var(--color-text-secondary)]">
+              ツナゲルを通じてご入社いただいた方に、入社祝い金をお贈りします。
+            </p>
+            <p className="mt-3 text-base md:text-lg text-[var(--color-text-muted)]">
+              ※入社後一定期間の継続勤務が支給条件となります。金額は求人により異なります。
+            </p>
+          </div>
+        </FadeIn>
 
-            <div className="p-8 space-y-6">
-              {/* Incentive */}
-              {offer.incentive && (
-                <div className="flex items-start gap-4 bg-[var(--color-accent)]/5 rounded-xl p-5 border border-[var(--color-accent)]/20">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center">
-                    <Gift className="w-5 h-5 text-[var(--color-accent)]" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[var(--color-text-primary)]">特典</p>
-                    <p className="text-[var(--color-text-secondary)] mt-1">{offer.incentive}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Guarantee */}
-              {offer.guarantee && (
-                <div className="flex items-start gap-4 bg-green-50 rounded-xl p-5 border border-green-100">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[var(--color-text-primary)]">安心保証</p>
-                    <p className="text-[var(--color-text-secondary)] mt-1">{offer.guarantee}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* CTA */}
-              <div className="text-center pt-4">
-                <CTAButton href="#contact" size="xl" fullWidth>
-                  {cta.buttonText}
-                </CTAButton>
-                <p className="mt-3 text-sm text-[var(--color-text-muted)]">{cta.subText}</p>
-              </div>
-            </div>
+        <FadeIn delay={0.4}>
+          <div className="mt-10 text-center">
+            <CTAButton href={cta.registerUrl} size="xl" fullWidth>
+              {cta.buttonText}
+            </CTAButton>
+            <p className="mt-3 text-lg text-[var(--color-text-muted)]">
+              途中退会も自由 ｜ 費用は一切かかりません
+            </p>
           </div>
         </FadeIn>
       </div>
