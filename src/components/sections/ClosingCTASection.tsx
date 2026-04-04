@@ -46,7 +46,7 @@ export default function ClosingCTASection() {
 
           <div className="mt-10">
             <CTAButton href={cta.registerUrl} size="xl" variant="cta">
-              無料で相談してみる
+              無料で登録する
             </CTAButton>
             <p className="mt-4 text-sm text-white/70">
               30秒で登録完了 ｜ 利用料ずっと0円 ｜ 退会も自由
