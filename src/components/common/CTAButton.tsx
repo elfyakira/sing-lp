@@ -55,10 +55,23 @@ export default function CTAButton({
     setResolvedHref(withTrackingParams(href));
   }, [href]);
 
+  const handleCtaClick = () => {
+    if (typeof window === "undefined") return;
+    const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+    if (typeof w.gtag === "function") {
+      w.gtag("event", "click_register_button", {
+        event_category: "engagement",
+        event_label: resolvedHref,
+        transport_type: "beacon",
+      });
+    }
+  };
+
   if (href) {
     return (
       <motion.a
         href={resolvedHref}
+        onClick={handleCtaClick}
         className={combinedClassName}
         {...motionProps}
       >

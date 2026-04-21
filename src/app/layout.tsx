@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Noto_Sans_JP, Noto_Serif_JP, M_PLUS_Rounded_1c, Oswald, Anton, Black_Han_Sans, M_PLUS_1p, Shippori_Mincho_B1 } from "next/font/google";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-NPQ3KEZ06R";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans",
@@ -84,6 +87,18 @@ export default function RootLayout({
       <body
         className={`${notoSansJP.variable} ${notoSerifJP.variable} ${mPlusRounded.variable} ${oswald.variable} ${anton.variable} ${blackHanSans.variable} ${mPlus1p.variable} ${shipporiMincho.variable} antialiased`}
       >
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         {children}
       </body>
     </html>
