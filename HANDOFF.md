@@ -11,8 +11,11 @@
 | ディレクトリ | client_lp/sing/ |
 | 作成日 | 2026-03-31 |
 | GitHubリポジトリ | https://github.com/elfyakira/sing-lp |
-| 本番URL | https://sing-bonus-lp.vercel.app |
+| 本番URL | https://tsunageru.singgroup.biz |
+| Vercel旧URL | https://sing-bonus-lp.vercel.app |
 | Vercelプロジェクト | elfyakiras-projects/sing-bonus-lp |
+| GA4プロパティ | G-NPQ3KEZ06R（メインドメインと共用、LPにも設置済み） |
+| 登録画面ドメイン | https://tunageru.net/register/new（**別会社管理・触れない**） |
 
 ## ブランドカラー
 
@@ -80,9 +83,9 @@
 | feature-money.png | 強み①: 祝い金 | ○ |
 | feature-advisor.png | 強み②: 面談 | ○ |
 | feature-video.png | 強み③: 職場動画 | ○ |
-| voice-01.png | お客様の声①: 田中さん | ○ |
-| voice-02.png | お客様の声②: 佐藤さん | ○ |
-| voice-03.png | お客様の声③: 鈴木さん | ○ |
+| voice-01.png | お客様の声①: T.Sさん | ○ |
+| voice-02.png | お客様の声②: S.Mさん | ○ |
+| voice-03.png | お客様の声③: S.Kさん | ○ |
 | faq-illust.png | FAQ Q&Aイラスト | ○ |
 | closing-bg.png | 最終CTA背景 | ○ |
 | hero-main.png | 旧ヒーロー（未使用） | × |
@@ -95,3 +98,36 @@
 | hero-banner-bg.png | 旧背景（未使用） | × |
 | hero-complete.png | 旧テキスト入り（未使用） | × |
 | text-100.png | 旧テキスト画像（未使用） | × |
+
+## 計測（Meta広告 → LP → CTAクリック）
+
+### 目的
+**「Meta広告経由でLPに来てCTAボタンをクリックした人数」** を測ること。
+登録画面 (`tunageru.net`) は別会社管理でGA4/Pixel設置不可のため、登録画面到達数は直接計測不能。**CTAクリック数を proxy として使う**。
+
+### 実装済み（コード）
+
+| ファイル | 内容 |
+|---------|------|
+| `src/app/layout.tsx` | GA4タグ (`G-NPQ3KEZ06R`) を `next/script` で全ページ設置 |
+| `src/lib/utm.ts` | URL着地時の `utm_*` / `fbclid` / `gclid` を sessionStorage に保存し、登録URLにマージ。デフォルトUTM (`utm_source=meta&utm_medium=paid_social&utm_campaign=tsunageru_bonus_lp`) も付与 |
+| `src/components/common/CTAButton.tsx` | マウント時に `withTrackingParams()` でhrefを書き換え。クリック時に `gtag('event', 'click_register_button', { transport_type: 'beacon' })` を発火 |
+
+### 残タスク（次回続きから）
+
+#### 🔴 ユーザー側（GA4管理画面で）
+1. **動作確認** — `https://tsunageru.singgroup.biz/?utm_source=meta&utm_medium=paid_social&utm_campaign=test` にアクセス → CTAクリック → GA4「レポート → リアルタイム」で `click_register_button` イベントが現れるか確認
+2. **キーイベント化** — 24時間後、GA4「管理 → イベント」に `click_register_button` が出現したら、トグルでキーイベントとしてマーク
+3. **Meta広告マネージャー設定** — 広告のURLパラメータ欄に以下を設定:
+   ```
+   utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_id={{campaign.id}}
+   ```
+
+#### 🟡 任意の追加実装
+- **Meta Pixel** をLPに設置 → Meta広告マネージャー側で直接CVR/CPAが見える（Pixel ID取得が必要）
+- **クロスドメイン設定** — 今回は不要（登録画面側にGA4が無いため）
+
+### レポートの見方（数字の確認）
+GA4 → レポート → エンゲージメント → イベント → `click_register_button`
+- 二次ディメンション: 「セッションのソース/メディア」を追加
+- `meta / paid_social` の行 = **目的の数字** 🎯
