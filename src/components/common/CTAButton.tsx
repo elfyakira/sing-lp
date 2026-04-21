@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { captureTrackingParams, withTrackingParams } from "@/lib/utm";
 
 interface CTAButtonProps {
   children: React.ReactNode;
@@ -46,10 +48,17 @@ export default function CTAButton({
     transition: { duration: 0.2 },
   };
 
+  const [resolvedHref, setResolvedHref] = useState(href);
+  useEffect(() => {
+    if (!href) return;
+    captureTrackingParams();
+    setResolvedHref(withTrackingParams(href));
+  }, [href]);
+
   if (href) {
     return (
       <motion.a
-        href={href}
+        href={resolvedHref}
         className={combinedClassName}
         {...motionProps}
       >
