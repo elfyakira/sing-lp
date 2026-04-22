@@ -119,7 +119,7 @@ export const sampleData = {
 
   // CTA
   cta: {
-    buttonText: "まずは無料で相談する",
+    buttonText: "30秒で無料登録",
     subText: "30秒で登録完了 ｜ 無理な勧誘は一切ありません",
     registerUrl: "https://tunageru.net/register/new",
   },
